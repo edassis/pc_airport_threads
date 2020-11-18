@@ -1,0 +1,8 @@
+# Folders
+bin/
+
+# Files
+*.exe
+a
+*.o
+*.zip
