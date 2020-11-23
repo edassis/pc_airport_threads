@@ -17,10 +17,10 @@
 #include "../header/aeroporto.h"
 #include "../header/queue.h"
 
-#define PASSAGEIRO  5  // compram passagens no atendimento, passam no scanner, esperam seu avião no patio
-#define ATENDIMENTO 1
-#define SCANNER     1
-#define AVIAO       1
+#define PASSAGEIRO  30  // compram passagens no atendimento, passam no scanner, esperam seu avião no patio
+#define ATENDIMENTO 3
+#define SCANNER     2
+#define AVIAO       5
 
 // tempo de voo
 #define AVIAO_TIME_VOO_BASE 8
@@ -29,7 +29,7 @@
 #define AVIAO_ESPERA_BASE   20
 #define AVIAO_ESPERA_OFFSET 8
 // carga maxima (passageiros)
-#define AVIAO_CARGA_BASE 10
+#define AVIAO_CARGA_BASE 5
 #define AVIAO_CARGA_OFFSET 1
 
 Aviao aviao[AVIAO];     // array de avioes
@@ -141,7 +141,6 @@ void *atendimento(void *arg) {
             sleep(rand_r(arg) % 5);
             pas->aviao_id = rand() % AVIAO;
             
-            // conferir tb a fila do patio
             pthread_mutex_lock(&scanner_lock);
             while (scanner_queue->size >= PASSAGEIRO) { // colocar na fila do scanner
                 printf("Atendimento %d: Fila do scanner cheia. Passageiro %d aguardando no atendimento.\n", id, pas->id);
